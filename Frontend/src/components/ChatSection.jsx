@@ -370,7 +370,7 @@ export default function ChatSection() {
     try {
 
       await fetch(
-        "http://localhost:3000/history/message",
+        "https://skyverse-ai-chatbot.onrender.com/history/message",
         {
           method: "POST",
           headers: {
