@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Backend URL from .env OR fallback localhost:3000
-const BACKEND_URL = import.meta.env.VITE_BACKEND || "http://localhost:3000";
+const BACKEND_URL = import.meta.env.VITE_BACKEND || "https://skyverse-ai-chatbot.onrender.com";
 
 export default function Signup() {
   const [name, setName] = useState("");

@@ -17,7 +17,7 @@ import {
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND || "http://localhost:3000";
+const BACKEND_URL = import.meta.env.VITE_BACKEND || "https://skyverse-ai-chatbot.onrender.com";
 
 export default function ChatSection() {
 
