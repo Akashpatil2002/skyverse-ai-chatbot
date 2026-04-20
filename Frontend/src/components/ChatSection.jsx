@@ -370,7 +370,7 @@ export default function ChatSection() {
     try {
 
       await fetch(
-        "http://localhost:3000/history/message",
+        `${BACKEND_URL}/history/message`,
         {
           method: "POST",
           headers: {
