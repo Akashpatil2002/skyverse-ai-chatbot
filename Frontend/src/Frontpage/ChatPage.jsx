@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import imageaksh from "../assets/DSC_0190.JPG";
+import { Link } from "react-router-dom";
 
 export default function ChatPage() {
     const navigate = useNavigate();
@@ -28,7 +29,7 @@ export default function ChatPage() {
         },
         {
             name: "Pro",
-            price: "19",
+            price: "99",
             period: "/month",
             desc: "Best for individual developers",
             features: [
@@ -44,7 +45,7 @@ export default function ChatPage() {
         },
         {
             name: "Team",
-            price: "49",
+            price: "499",
             period: "/month",
             desc: "For small teams & startups",
             features: [
@@ -122,24 +123,28 @@ export default function ChatPage() {
             {/* Navbar - Unchanged */}
             <nav className="fixed top-0 w-full z-50 bg-[#0a0f1c]/90 backdrop-blur-xl border-b border-white/10">
                 <div className="max-w-7xl mx-auto px-5 md:px-8 py-5 flex justify-between items-center">
+
                     <div className="flex items-center gap-3">
-                        <motion.div
-                            className="p-2 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl"
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                        >
-                            <Sparkles className="w-7 h-7 md:w-8 md:h-8 text-white" />
-                        </motion.div>
-                        <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-white via-indigo-100 to-purple-200 bg-clip-text text-transparent">
-                            SkyVerse AI
-                        </span>
+                        <Link to="/" className="flex items-center gap-3">
+                            <motion.div
+                                className="p-2 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl"
+                                animate={{ rotate: 360 }}
+                                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                            >
+                                <Sparkles className="w-7 h-7 md:w-8 md:h-8 text-white" />
+                            </motion.div>
+
+                            <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-white via-indigo-100 to-purple-200 bg-clip-text text-transparent">
+                                SkyVerse AI
+                            </span>
+                        </Link>
                     </div>
 
                     <div className="hidden md:flex items-center gap-4">
-                        <button onClick={() => navigate("/login")} className="px-6 py-2.5 rounded-2xl border border-white/20 hover:border-white/40 hover:bg-white/5 transition-all text-sm font-medium">
+                        <button onClick={() => navigate("/login")} className="px-6 py-2.5 rounded-2xl border border-white/20 hover:border-white/40 hover:bg-white/5 transition-all text-sm font-medium cursor-pointer">
                             Sign In
                         </button>
-                        <button onClick={() => navigate("/signup")} className="px-6 py-2.5 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transition-all font-medium shadow-lg shadow-indigo-500/30">
+                        <button onClick={() => navigate("/signup")} className="px-6 py-2.5 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transition-all font-medium shadow-lg shadow-indigo-500/30 cursor-pointer">
                             Get Started Free
                         </button>
                     </div>
@@ -190,10 +195,10 @@ export default function ChatPage() {
                     </motion.div>
 
                     <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.2 }} className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4">
-                        <button onClick={() => navigate("/signup")} className="w-full sm:w-auto px-10 py-4 rounded-3xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-lg font-semibold flex items-center justify-center gap-3 shadow-xl shadow-indigo-600/40 transition-all active:scale-95 hover:scale-105">
+                        <button onClick={() => navigate("/signup")} className="w-full sm:w-auto px-10 py-4 rounded-3xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-lg font-semibold flex items-center justify-center gap-3 shadow-xl shadow-indigo-600/40 transition-all active:scale-95 hover:scale-105 cursor-pointer">
                             Start Coding Now 🚀 <ArrowRight />
                         </button>
-                        <button onClick={() => navigate("/login")} className="w-full sm:w-auto px-10 py-4 rounded-3xl border border-white/30 hover:bg-white/10 hover:border-white/50 text-lg font-medium transition-all flex items-center justify-center gap-3">
+                        <button onClick={() => navigate("/login")} className="w-full sm:w-auto px-10 py-4 rounded-3xl border border-white/30 hover:bg-white/10 hover:border-white/50 text-lg font-medium transition-all flex items-center justify-center gap-3 cursor-pointer">
                             <Play className="w-5 h-5" /> Watch Demo
                         </button>
                     </motion.div>
@@ -262,7 +267,7 @@ export default function ChatPage() {
                     <div className="text-center mt-12">
                         <button
                             onClick={() => navigate("/signup")}
-                            className="px-10 py-4 rounded-3xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-lg font-semibold flex items-center gap-3 mx-auto transition-all hover:scale-105"
+                            className="px-10 py-4 rounded-3xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-lg font-semibold flex items-center gap-3 mx-auto transition-all hover:scale-105 cursor-pointer"
                         >
                             Start Using Now <ArrowRight />
                         </button>
@@ -372,24 +377,44 @@ export default function ChatPage() {
                                     ))}
                                 </ul>
 
-                                <button
+                                {/* <button
                                     onClick={() => navigate(plan.popular ? "/signup" : "#")}
                                     className={`w-full py-4 rounded-2xl font-semibold transition-all ${plan.popular
                                         ? 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500'
                                         : 'border border-white/30 hover:bg-white/5'}`}
                                 >
                                     {plan.buttonText}
+                                </button> */}
+                                <button
+                                    onClick={() =>
+                                        navigate(
+                                            plan.name === "Free"
+                                                ? "/login"
+                                                : plan.name === "Pro"
+                                                    ? "/signup"
+                                                    : plan.name === "Team"
+                                                        ? "/contact-sales"
+                                                        : "/"
+                                        )
+                                    }
+                                    className={`w-full py-4 rounded-2xl font-semibold cursor-pointer transition-all ${plan.popular
+                                        ? "bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500"
+                                        : "border border-white/30 hover:bg-white/5"
+                                        }`}
+                                >
+                                    {plan.buttonText}
                                 </button>
+
                             </motion.div>
                         ))}
                     </div>
 
                     <p className="text-center text-gray-500 mt-10 text-sm">All plans include a 14-day free trial of Pro features. Cancel anytime.</p>
                 </div>
-            </section>
+            </section >
 
             {/* ====================== NEW: Frequently Asked Questions Section ====================== */}
-            <section className="py-20 bg-[#0f1629]">
+            < section className="py-20 bg-[#0f1629]" >
                 <div className="max-w-4xl mx-auto px-5 md:px-8">
                     <div className="text-center mb-16">
                         <div className="inline-flex items-center gap-2 text-indigo-400 mb-4">
@@ -409,7 +434,7 @@ export default function ChatPage() {
                             >
                                 <button
                                     onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
-                                    className="w-full px-8 py-6 flex justify-between items-center text-left hover:bg-white/5 transition-all"
+                                    className="w-full px-8 py-6 flex justify-between items-center text-left hover:bg-white/5 transition-all cursor-pointer"
                                 >
                                     <span className="text-lg font-medium pr-8">{faq.q}</span>
                                     <motion.div
@@ -435,10 +460,10 @@ export default function ChatPage() {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Developer Section - Unchanged */}
-            <section className="py-20 bg-[#0a0f1c]">
+            < section className="py-20 bg-[#0a0f1c]" >
                 <div className="max-w-5xl mx-auto px-5 md:px-8">
                     <div className="text-center mb-12">
                         <h2 className="text-4xl font-bold mb-3">Built with ❤️ by</h2>
@@ -464,21 +489,21 @@ export default function ChatPage() {
                         </motion.div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Final CTA - Unchanged */}
-            <section className="py-20 text-center bg-gradient-to-b from-[#0f1629] to-[#0a0f1c]">
+            < section className="py-20 text-center bg-gradient-to-b from-[#0f1629] to-[#0a0f1c]" >
                 <div className="max-w-2xl mx-auto px-5">
                     <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to take your coding to the next level?</h2>
                     <p className="text-gray-400 text-lg mb-10">Join thousands of developers who are already using SkyVerse AI every day</p>
-                    <button onClick={() => navigate("/signup")} className="px-12 py-5 rounded-3xl bg-gradient-to-r from-indigo-600 to-purple-600 text-xl font-semibold hover:scale-105 transition-all shadow-2xl shadow-purple-600/40">
+                    <button onClick={() => navigate("/signup")} className="px-12 py-5 rounded-3xl bg-gradient-to-r from-indigo-600 to-purple-600 text-xl font-semibold hover:scale-105 transition-all shadow-2xl shadow-purple-600/40 cursor-pointer">
                         Start Free Today — No Credit Card Needed
                     </button>
                 </div>
-            </section>
+            </section >
 
             {/* Footer - Unchanged */}
-            <footer className="bg-[#080c17] border-t border-white/10 py-16">
+            < footer className="bg-[#080c17] border-t border-white/10 py-16" >
                 <div className="max-w-7xl mx-auto px-5 md:px-8">
                     <div className="grid md:grid-cols-4 gap-10">
                         <div>
@@ -521,7 +546,7 @@ export default function ChatPage() {
                         <div>Built by Akash Sonavane</div>
                     </div>
                 </div>
-            </footer>
-        </div>
+            </footer >
+        </div >
     );
 }

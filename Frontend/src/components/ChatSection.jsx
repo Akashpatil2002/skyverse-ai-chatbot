@@ -649,7 +649,7 @@ export default function ChatSection() {
                 <button
                   onClick={handleRefreshSessions}
                   disabled={refreshing || !backendAvailable}
-                  className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed group"
+                  className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed group cursor-pointer"
                   title="Refresh sessions"
                 >
                   <RotateCcw
@@ -711,7 +711,7 @@ export default function ChatSection() {
                         e.stopPropagation();
                         deleteSession(session._id);
                       }}
-                      className="opacity-100 md:opacity-0 md:group-hover:opacity-100 p-2 rounded-lg bg-red-500/20 hover:bg-red-500/40 transition-all"
+                      className="opacity-100 md:opacity-0 md:group-hover:opacity-100 p-2 rounded-lg bg-red-500/20 hover:bg-red-500/40 transition-all cursor-pointer"
                       title="Delete session"
                     >
                       <Trash2 className="w-4 h-4 text-red-400" />
@@ -725,7 +725,7 @@ export default function ChatSection() {
               <button
                 onClick={handleNewSession}
                 disabled={loading}
-                className="w-full p-3 bg-cyan-500/20 hover:bg-cyan-500/30 rounded-lg transition-colors flex items-center justify-center text-cyan-400 font-medium disabled:opacity-50"
+                className="w-full p-3 bg-cyan-500/20 hover:bg-cyan-500/30 rounded-lg transition-colors flex items-center justify-center text-cyan-400 font-medium disabled:opacity-50 cursor-pointer"
               >
                 <Plus className="w-5 h-5 mr-2" />
                 New Session
@@ -745,7 +745,7 @@ export default function ChatSection() {
             <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
               <button
                 onClick={toggleSidebar}
-                className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors flex-shrink-0"
+                className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors flex-shrink-0 cursor-pointer"
                 title={sidebarExpanded ? "Collapse sidebar" : "Expand sidebar"}
               >
                 {sidebarExpanded ? (
@@ -785,7 +785,7 @@ export default function ChatSection() {
               <button
                 onClick={handleNewSession}
                 disabled={loading}
-                className="p-2 bg-cyan-500/20 hover:bg-cyan-500/30 rounded-lg transition-colors disabled:opacity-50 flex-shrink-0"
+                className="p-2 bg-cyan-500/20 hover:bg-cyan-500/30 rounded-lg transition-colors disabled:opacity-50 flex-shrink-0 cursor-pointer"
                 title="New Session"
               >
                 <Plus className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" />
@@ -796,7 +796,7 @@ export default function ChatSection() {
                   Logout();
                   window.location.href = "/login";
                 }}
-                className="px-3 py-1.5 sm:py-2 bg-red-500/20 hover:bg-red-500/30 rounded-lg transition-colors text-red-400 text-xs sm:text-sm whitespace-nowrap"
+                className="px-3 py-1.5 sm:py-2 bg-red-500/20 hover:bg-red-500/30 rounded-lg transition-colors text-red-400 text-xs sm:text-sm whitespace-nowrap cursor-pointer"
                 title="Logout"
               >
                 Logout
@@ -946,7 +946,7 @@ export default function ChatSection() {
                 <button
                   type="button"
                   onClick={handleMicClick}
-                  className="flex items-center justify-center w-9 h-9 rounded-full bg-black/30 backdrop-blur-md border border-white/20 hover:border-[oklch(71.5%_0.143_215.221)] hover:bg-[oklch(71.5%_0.143_215.221)/0.2] transition-all duration-300 shadow-lg"
+                  className="flex items-center justify-center w-9 h-9 rounded-full bg-black/30 backdrop-blur-md border border-white/20 hover:border-[oklch(71.5%_0.143_215.221)] hover:bg-[oklch(71.5%_0.143_215.221)/0.2] transition-all duration-300 shadow-lg cursor-pointer"
                 >
                   <Mic className={`w-5 h-5 ${isRecording ? "text-red-400 animate-pulse" : "text-[oklch(71.5%_0.143_215.221)]"}`} />
                 </button>
@@ -956,7 +956,7 @@ export default function ChatSection() {
             <button
               onClick={loading ? stopGeneration : sendMessage}
               disabled={(!question.trim() && !loading) || !backendAvailable}
-              className="p-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl shadow-xl text-white transition-all duration-300 hover:shadow-2xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 group flex items-center gap-2 flex-shrink-0"
+              className="p-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl cursor-pointer shadow-xl text-white transition-all duration-300 hover:shadow-2xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 group flex items-center gap-2 flex-shrink-0"
             >
               {loading ? (
                 <span className="w-3 h-3 bg-white rounded-sm"></span>

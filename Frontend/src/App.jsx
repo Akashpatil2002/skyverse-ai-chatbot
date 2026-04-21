@@ -4,6 +4,7 @@ import Login from "./components/Login"; // your login component
 import Signup from "./components/Signup"; // your signup component
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute"; // your auth wrapper
 import ChatPage from "./Frontpage/ChatPage";
+import NotFound from "./components/NotFound";
 
 function App() {
   const router = createBrowserRouter([
@@ -14,10 +15,9 @@ function App() {
           <ChatSection />
         </ProtectedRoute>
       ),
-      errorElement: <h1>404 - Page Not Found</h1>,
     },
-      {
-      path: "/chatpage",   // ✅ ADD THIS ROUTE
+    {
+      path: "/chatpage",
       element: <ChatPage />,
     },
     {
@@ -28,8 +28,13 @@ function App() {
       path: "/signup",
       element: <Signup />,
     },
-  ]);
 
+    // ✅ Catch-all route (invalid URLs ke liye)
+    {
+      path: "*",
+      element: <NotFound />,
+    },
+  ]);
   return <RouterProvider router={router} />;
 }
 
