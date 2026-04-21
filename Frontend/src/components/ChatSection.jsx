@@ -966,10 +966,10 @@ export default function ChatSection() {
             </button>
           </div>
 
-          {/* <p className="text-center text-white/25 text-xs mt-3">
+          <p className="text-center text-white/25 text-xs mt-3">
             Press Enter to send • All messages synced to database • AI powered by Gemini
             {!backendAvailable && " • ⚠️ Backend offline"}
-          </p> */}
+          </p>
         </div>
       </div>
     </div>
