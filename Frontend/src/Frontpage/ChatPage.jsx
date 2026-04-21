@@ -1,9 +1,11 @@
 import { Sparkles, ArrowRight, Play, Users, Zap, Code2, Brain, Trophy, Menu, X, Github, Twitter, Linkedin, Heart, Check, Star, BookOpen, HelpCircle, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import imageaksh from "../assets/DSC_0190.JPG";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { LifeBuoy } from "lucide-react";
 
 export default function ChatPage() {
     const navigate = useNavigate();
@@ -118,6 +120,29 @@ export default function ChatPage() {
         }
     ];
 
+    const words = [
+        "Superpower",
+        "Assistant",
+        "Mentor",
+        "Copilot",
+        "Partner",
+        "Booster",
+        "Navigator",
+        "Companion"
+    ];
+
+    const [index, setIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setIndex((prev) => (prev + 1) % words.length);
+        }, 4000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const [openHelp, setOpenHelp] = useState(false);
+
     return (
         <div className="min-h-screen bg-[#0a0f1c] text-white overflow-x-hidden">
             {/* Navbar - Unchanged */}
@@ -185,7 +210,71 @@ export default function ChatPage() {
 
                         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tighter mb-6">
                             Your AI Coding<br className="hidden sm:block" />
-                            <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Superpower</span>
+                            <span
+                                className="inline-block relative h-[1.2em] w-full"
+                                style={{ perspective: 1000 }}
+                            >
+                                <AnimatePresence mode="wait">
+                                    <motion.span
+                                        key={words[index]}
+                                        className="absolute left-1/2 -translate-x-1/2 flex"
+                                        initial="hidden"
+                                        animate="visible"
+                                        exit="exit"
+                                        variants={{
+                                            visible: {
+                                                transition: {
+                                                    staggerChildren: 0.06
+                                                }
+                                            },
+                                            exit: {
+                                                transition: {
+                                                    staggerChildren: 0.04,
+                                                    staggerDirection: -1
+                                                }
+                                            }
+                                        }}
+                                    >
+                                        {words[index].split("").map((letter, i) => (
+                                            <motion.span
+                                                key={i}
+                                                variants={{
+                                                    hidden: {
+                                                        opacity: 0,
+                                                        y: -80,
+                                                        x: Math.sin(i * 0.8) * 25,
+                                                        rotate: -40,
+                                                        scale: 0.7
+                                                    },
+                                                    visible: {
+                                                        opacity: 1,
+                                                        y: 0,
+                                                        x: 0,
+                                                        rotate: 0,
+                                                        scale: 1
+                                                    },
+                                                    exit: {
+                                                        opacity: 0,
+                                                        y: 80,
+                                                        x: Math.sin(i * 0.8) * -25,
+                                                        rotate: 40,
+                                                        scale: 0.7
+                                                    }
+                                                }}
+                                                transition={{
+                                                    duration: 0.7,
+                                                    ease: [0.22, 1, 0.36, 1]
+                                                }}
+                                                className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400
+bg-clip-text text-transparent
+drop-shadow-[0_0_20px_rgba(139,92,246,0.45)]"
+                                            >
+                                                {letter}
+                                            </motion.span>
+                                        ))}
+                                    </motion.span>
+                                </AnimatePresence>
+                            </span>
                         </h1>
 
                         <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-10 md:mb-12">
@@ -547,6 +636,64 @@ export default function ChatPage() {
                     </div>
                 </div>
             </footer >
+
+
+            {/* Help Center */}
+            <div className="fixed bottom-6 right-6 z-50">
+
+                {/* Pulse Ring */}
+                <span className="absolute inline-flex h-14 w-14 rounded-full bg-indigo-500 opacity-40 animate-ping"></span>
+
+                {/* Floating Button */}
+                <motion.button
+                    onClick={() => setOpenHelp(!openHelp)}
+                    whileHover={{ scale: 1.12 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="relative flex items-center justify-center
+    h-14 w-14 rounded-full
+    bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600
+    text-white shadow-2xl hover:shadow-purple-500/40"
+                >
+                    {openHelp ? <X size={24} /> : <LifeBuoy size={26} />}
+                </motion.button>
+
+                {/* Popup Help Panel */}
+                <AnimatePresence>
+                    {openHelp && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 40, scale: 0.9 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 40, scale: 0.9 }}
+                            transition={{ duration: 0.35 }}
+                            className="absolute bottom-20 right-0 w-80
+        bg-black/80 backdrop-blur-xl
+        border border-white/10
+        rounded-2xl shadow-2xl p-5 text-white"
+                        >
+                            <h3 className="text-lg font-semibold mb-2">
+                                Need Help?
+                            </h3>
+
+                            <p className="text-sm text-gray-300 mb-4">
+                                Ask anything about SkyVerse AI. We're here to help you 🚀
+                            </p>
+
+                            <button
+                                onClick={() => navigate("/demo")}
+                                className="w-full py-2 rounded-xl
+  bg-gradient-to-r from-indigo-600 to-purple-600
+  hover:opacity-90"
+                            >
+                                Open Support Chat
+                            </button>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+            </div>
         </div >
+
+
     );
 }
+
