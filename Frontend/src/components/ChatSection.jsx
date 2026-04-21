@@ -626,9 +626,9 @@ export default function ChatSection() {
       >
         {sidebarExpanded && (
           <>
+            {/* Sidebar Header */}
             <div className="p-4 border-b border-white/10 flex-shrink-0">
               <div className="flex items-center justify-between mb-2">
-                {/* Left Section */}
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={toggleSidebar}
@@ -640,9 +640,7 @@ export default function ChatSection() {
 
                   <h2 className="text-lg font-semibold text-white flex items-center">
                     Chat Sessions
-                    <span className="text-xs text-white/40 ml-2">
-                      ({sessions.length})
-                    </span>
+                    <span className="text-xs text-white/40 ml-2">({sessions.length})</span>
                   </h2>
                 </div>
 
@@ -653,22 +651,18 @@ export default function ChatSection() {
                   title="Refresh sessions"
                 >
                   <RotateCcw
-                    className={`w-4 h-4 text-white transition-transform duration-300 ${refreshing
-                      ? "animate-spin"
-                      : "group-hover:rotate-180"
-                      }`}
+                    className={`w-4 h-4 text-white transition-transform duration-300 ${refreshing ? "animate-spin" : "group-hover:rotate-180"}`}
                   />
                 </button>
               </div>
 
-              {userInfo && (
-                <p className="text-xs text-white/60 mt-1">Welcome, {userInfo.name}</p>
-              )}
+              {userInfo && <p className="text-xs text-white/60">Welcome, {userInfo.name}</p>}
               <p className="text-xs text-white/30">
                 Backend: {backendAvailable ? "✓ Connected" : "✗ Disconnected"}
               </p>
             </div>
 
+            {/* Sidebar Sessions List */}
             <div className="flex-1 overflow-y-auto p-2 custom-scroll">
               {refreshing ? (
                 <div className="text-white/60 text-sm text-center py-8">
@@ -677,11 +671,8 @@ export default function ChatSection() {
                 </div>
               ) : sessions.length === 0 ? (
                 <div className="text-white/60 text-sm text-center py-8">
-                  No sessions yet
-                  <br />
-                  <span className="text-xs text-white/40">
-                    Create your first session to get started
-                  </span>
+                  No sessions yet<br />
+                  <span className="text-xs text-white/40">Create your first session to get started</span>
                 </div>
               ) : (
                 sessions.map((session) => (
@@ -707,10 +698,7 @@ export default function ChatSection() {
                       </p>
                     </div>
                     <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        deleteSession(session._id);
-                      }}
+                      onClick={(e) => { e.stopPropagation(); deleteSession(session._id); }}
                       className="opacity-100 md:opacity-0 md:group-hover:opacity-100 p-2 rounded-lg bg-red-500/20 hover:bg-red-500/40 transition-all"
                       title="Delete session"
                     >
@@ -721,6 +709,7 @@ export default function ChatSection() {
               )}
             </div>
 
+            {/* New Session Button */}
             <div className="p-4 border-t border-white/10 flex-shrink-0">
               <button
                 onClick={handleNewSession}
@@ -735,24 +724,19 @@ export default function ChatSection() {
         )}
       </div>
 
-      {/* Main Chat Area */}
-      <div className="flex-1 flex flex-col relative min-w-0 h-full overflow-hidden">
+      {/* ====================== MAIN CHAT AREA ====================== */}
+      <div className="flex-1 flex flex-col h-full overflow-hidden relative min-w-0">
 
-        {/* Header - Fixed height, no scroll */}
+        {/* Header */}
         <div className="relative z-10 p-3 sm:p-4 md:p-6 bg-black/20 border-b border-white/10 shadow-2xl flex-shrink-0">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            {/* Left Section */}
             <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
               <button
                 onClick={toggleSidebar}
                 className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors flex-shrink-0"
                 title={sidebarExpanded ? "Collapse sidebar" : "Expand sidebar"}
               >
-                {sidebarExpanded ? (
-                  <ChevronLeft className="w-5 h-5 text-white" />
-                ) : (
-                  <ChevronRight className="w-5 h-5 text-white" />
-                )}
+                {sidebarExpanded ? <ChevronLeft className="w-5 h-5 text-white" /> : <ChevronRight className="w-5 h-5 text-white" />}
               </button>
 
               <div className="relative flex-shrink-0">
@@ -774,7 +758,6 @@ export default function ChatSection() {
               </div>
             </div>
 
-            {/* Right Section */}
             <div className="flex items-center space-x-1 sm:space-x-2 flex-wrap flex-shrink-0">
               {sessions.length > 0 && (
                 <div className="hidden sm:block text-white/40 text-sm whitespace-nowrap">
@@ -792,10 +775,7 @@ export default function ChatSection() {
               </button>
 
               <button
-                onClick={() => {
-                  Logout();
-                  window.location.href = "/login";
-                }}
+                onClick={() => { Logout(); window.location.href = "/login"; }}
                 className="px-3 py-1.5 sm:py-2 bg-red-500/20 hover:bg-red-500/30 rounded-lg transition-colors text-red-400 text-xs sm:text-sm whitespace-nowrap"
                 title="Logout"
               >
@@ -805,7 +785,7 @@ export default function ChatSection() {
           </div>
         </div>
 
-        {/* Messages Area - Takes remaining height + scroll only here */}
+        {/* Messages Area - Yeh hi sirf scroll karega */}
         <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 relative z-10 custom-scroll">
           {error && (
             <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-4">
@@ -840,7 +820,9 @@ export default function ChatSection() {
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={{
-                    p: ({ node, ...props }) => <p className="text-sm md:text-base leading-relaxed whitespace-pre-wrap break-words" {...props} />,
+                    p: ({ node, ...props }) => (
+                      <p className="text-sm md:text-base leading-relaxed whitespace-pre-wrap break-words" {...props} />
+                    ),
                     strong: ({ node, ...props }) => <strong className="font-bold text-cyan-300" {...props} />,
                     li: ({ node, ...props }) => <li className="list-disc ml-5" {...props} />,
                     code: ({ node, inline, className, children, ...props }) => {
@@ -899,10 +881,9 @@ export default function ChatSection() {
         <div className="relative z-10 p-4 sm:p-6 backdrop-blur-md bg-black/20 border-t border-white/10 flex-shrink-0">
           <div className="flex items-center space-x-3 sm:space-x-4 max-w-4xl mx-auto">
             <div className="relative flex-1">
-              {/* File Upload Button */}
               <label
                 htmlFor="fileUpload"
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 z-50 cursor-pointer flex items-center justify-center w-9 h-9 rounded-full bg-black/30 backdrop-blur-md border border-white/20 hover:border-[oklch(71.5%_0.143_215.221)] hover:bg-[oklch(71.5%_0.143_215.221)/0.2] transition-all duration-300 shadow-lg"
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-50 cursor-pointer flex items-center justify-center w-9 h-9 rounded-full bg-black/30 backdrop-blur-md border border-white/20 hover:border-[oklch(71.5%_0.143_215.221)] hover:bg-[oklch(71.5%_0.143_215.221)/0.2] transition-all shadow-lg"
               >
                 <Plus className="w-6 h-6 text-[oklch(71.5%_0.143_215.221)] pointer-events-none" />
               </label>
@@ -933,7 +914,7 @@ export default function ChatSection() {
               />
 
               <input
-                className={`w-full pl-14 pr-20 rounded-2xl bg-black/20 backdrop-blur-sm border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-300 shadow-xl ${selectedImages.length > 0 ? "pt-16 pb-4" : "py-4"}`}
+                className={`w-full pl-14 pr-20 rounded-2xl bg-black/20 backdrop-blur-sm border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all shadow-xl ${selectedImages.length > 0 ? "pt-16 pb-4" : "py-4"}`}
                 type="text"
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
@@ -941,22 +922,19 @@ export default function ChatSection() {
                 onKeyDown={handleKeyDown}
               />
 
-              {/* Mic Button */}
-              <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={handleMicClick}
-                  className="flex items-center justify-center w-9 h-9 rounded-full bg-black/30 backdrop-blur-md border border-white/20 hover:border-[oklch(71.5%_0.143_215.221)] hover:bg-[oklch(71.5%_0.143_215.221)/0.2] transition-all duration-300 shadow-lg"
-                >
-                  <Mic className={`w-5 h-5 ${isRecording ? "text-red-400 animate-pulse" : "text-[oklch(71.5%_0.143_215.221)]"}`} />
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={handleMicClick}
+                className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center w-9 h-9 rounded-full bg-black/30 backdrop-blur-md border border-white/20 hover:border-[oklch(71.5%_0.143_215.221)] hover:bg-[oklch(71.5%_0.143_215.221)/0.2] transition-all shadow-lg"
+              >
+                <Mic className={`w-5 h-5 ${isRecording ? "text-red-400 animate-pulse" : "text-[oklch(71.5%_0.143_215.221)]"}`} />
+              </button>
             </div>
 
             <button
               onClick={loading ? stopGeneration : sendMessage}
               disabled={(!question.trim() && !loading) || !backendAvailable}
-              className="p-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl shadow-xl text-white transition-all duration-300 hover:shadow-2xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 group flex items-center gap-2 flex-shrink-0"
+              className="p-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl shadow-xl text-white transition-all hover:shadow-2xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed group flex-shrink-0"
             >
               {loading ? (
                 <span className="w-3 h-3 bg-white rounded-sm"></span>
