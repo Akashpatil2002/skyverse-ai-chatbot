@@ -18,7 +18,7 @@ const port = process.env.PORT || 3000;
 const allowedOrigins = [
   "http://localhost:5173",
   "https://skyverse-ai-chatbot.onrender.com",
-  "https://skyverse-ai-chatbot.vercel.app",
+  "https://askskyverse.vercel.app",
 ];
 
 // ✅ Middleware
